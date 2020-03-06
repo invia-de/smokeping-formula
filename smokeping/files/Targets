@@ -1,20 +1,11 @@
 {%- from "smokeping/map.jinja" import smokeping with context -%}
+{%- import "smokeping/files/macro" as macro %}
 {%- set targets = smokeping.targets -%}
 *** Targets ***
 
-probe = {{ smokeping.targets.probe }}
+probe = {{ targets.global.probe }}
 menu = Top
-title = {{ smokeping.targets.title }}
-remark = {{ salt['pillar.get']('smokeping:targets:remark', '') }}
-alerts = {{ salt['pillar.get']('smokeping:targets:alerts', '') }}
-
-{% for target, options in smokeping.targets.items() -%}
-{% if options is mapping() -%}
-+ {{ target }}
-
-{% for key, value in options.items() -%}
-{{ key }} = {{ value }}
-{% endfor %}
-
-{% endif %}
-{% endfor %}
+title = {{ targets.global.title }}
+remark = {{ targets.global.remark }}
+{% if 'alerts' in targets.global %}alerts = {{ targets.global.alerts }}{%endif %}
+{{ macro.printConfig(1, targets.targets) }}

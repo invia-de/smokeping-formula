@@ -1,9 +1,5 @@
 {%- from "smokeping/map.jinja" import smokeping with context -%}
+{%- import "smokeping/files/macro" as macro %}
 *** Probes ***
 
-{% for probe, settings in smokeping.probes.items() %}
-+ {{ probe }}
-{% for key, value in settings.items() %}
-{{ key }} = {{ value }}
-{% endfor %}
-{% endfor %}
+{{ macro.printConfig(1, smokeping.probes) }}

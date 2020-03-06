@@ -2,7 +2,7 @@
 
 smokeping:
   pkg.installed:
-    - name: {{ smokeping.lookup.pkg }}
+    - pkgs: {{ smokeping.lookup.pkg }}
 
   service.running:
     - name: smokeping

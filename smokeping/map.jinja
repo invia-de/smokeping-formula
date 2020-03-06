@@ -1,7 +1,7 @@
 {% set smokeping = salt['pillar.get']('smokeping', {
      'lookup': salt['grains.filter_by']({
         'Debian': {
-            'pkg': 'smokeping',
+            'pkg': ['smokeping', 'mtr'],
             'sendmail': '/usr/sbin/sendmail',
             'imgcache': '/var/cache/smokeping/images',
             'imgurl': '../smokeping/images',

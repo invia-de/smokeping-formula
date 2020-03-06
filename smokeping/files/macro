@@ -1,0 +1,15 @@
+{% macro printConfig(depth, config) %}
+{%- for c in config %}
+
+{% for _ in range(0,depth) %}+{% endfor %} {{ c.item }}
+{%- for ci, cv in c.items() %}
+{%- if ci not in ['child', 'item' ] %}
+{{ ci }} = {{ cv }}
+{%- endif %}
+{%- endfor %}
+{%- if 'child' in c %}
+{%- set depth = depth + 1 %}
+{{ printConfig(depth, c.child) }}
+{%- endif %}
+{%- endfor %}
+{%- endmacro %}
