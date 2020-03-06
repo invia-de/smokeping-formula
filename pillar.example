@@ -1,21 +1,66 @@
 smokeping:
-  owner: Peter Random
-  contact: noc@email.to.nowhere
+    owner: Peter Random
+    contact: noc@email.to.nowhere
 
-  alerts:
-    from: smokealert@company.xy
-    to: alertee@address.somewhere
+    alerts:
+        from: smokealert@company.xy
+        to: alertee@address.somewhere
 
-    bigloss:
-      type: loss
-      pattern: ==0%,==0%,==0%,==0%,>0%,>0%,>0%
-      comment: suddenly there is packet loss
+        bigloss:
+            type: loss
+            pattern: ==0%,==0%,==0%,==0%,>0%,>0%,>0%
+            comment: suddenly there is packet loss
+    targets:
+        global:
+            probe: FPingNormal
+            menu: Top
+            title: Network Latency Grapher
+            remark: 'Location: Site 1'
+    probes:
+        - item: FPing
+          binary: /usr/bin/fping
+          child:
+            - item: FPingNormal
+              offset: 0%
+            - item: FPingDebug
+              blazemode: 'true'
+              hostinterval: 1.0
+              offset: 50%
+              pings: 20
+              step: 30
+              timeout: 1.5
 
-  targets:
-    alerts: bigloss
-    LocalMachine:
-      menu: Local Machine
-      title: This host
-      remark: Pinging 127.0.0.1
-      host: localhost
-      alerts: someloss
+    targets:
+        - item: Site 1
+          menu: Site 1
+          title:  Site 1
+          child:
+            - item: Location1
+              menu: Location 1
+              title:  Location 1
+              child:
+                - item: TargetGroup1
+                  menu: TargetGroup 1
+                  title: TargetGroup 1
+                  child:
+                    - item: Target1
+                      menu: Target 1
+                      title: Target 1
+                      host: 10.0.0.1
+        - item: Target2
+                      menu: Target 2
+                      title: Target 2
+                      host: 10.0.0.2
+                - item: TargetGroup2
+                  menu: TargetGroup 2
+                  title: TargetGroup 2
+                  child:
+                    - item: Target1
+                      menu: Target 1
+                      title: Target 1
+                      host: 10.1.0.1
+        - item: Target2
+                      menu: Target 2
+                      title: Target 2
+                      host: 10.1.0.2
+
