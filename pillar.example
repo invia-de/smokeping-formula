@@ -47,7 +47,7 @@ smokeping:
                       menu: Target 1
                       title: Target 1
                       host: 10.0.0.1
-        - item: Target2
+                    - item: Target2
                       menu: Target 2
                       title: Target 2
                       host: 10.0.0.2
@@ -59,7 +59,7 @@ smokeping:
                       menu: Target 1
                       title: Target 1
                       host: 10.1.0.1
-        - item: Target2
+                    - item: Target2
                       menu: Target 2
                       title: Target 2
                       host: 10.1.0.2
